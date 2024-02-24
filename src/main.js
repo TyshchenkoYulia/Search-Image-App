@@ -7,7 +7,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 // ====================================================================
 
-import errorIcon from "../src/img/error-icon.svg";
+// import errorIcon from "../src/img/error-icon.svg";
 
 // const lightbox = new SimpleLightbox('.gallery a',
 //                                  { captionType: 'attr',
