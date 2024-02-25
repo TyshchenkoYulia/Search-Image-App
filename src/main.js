@@ -5,29 +5,60 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+import errorIcon from "../src/img/error-icon.svg";
+
+import { getImages} from "./js/pixabay-api";
+import { createMarkup } from "./js/render-functions";
+
 // ====================================================================
 
-// import errorIcon from "../src/img/error-icon.svg";
+export const gallery = document.querySelector('.gallery');
+const formSubmit = document.querySelector('.form');
+export const inputValue = document.querySelector('.input-value');
+const section = document.querySelector('section');
+export const loading = document.querySelector('div');
 
-// const lightbox = new SimpleLightbox('.gallery a',
-//                                  { captionType: 'attr',
-//                                    captionsData: 'alt',
-//                                    captionDelay: 250,
-//                                  });
+// ======================================================================
 
+formSubmit.addEventListener('submit', onButtonSubmitForm);
 
-// ===================================================================
+function onButtonSubmitForm(event) {
+    event.preventDafault();
 
-//  iziToast.show({
-//                 titleColor: '#fff',
-//                 titleSize: '16px',
-//                 message: 'Sorry, there are no images matching your search query. Please try again!',
-//                 messageColor: '#fff',
-//                 messageSize: '16px',
-//                 iconUrl: errorIcon,
-//                 position: 'topRight',
-//                 backgroundColor: '#ef4040',
-//                 close: true,
-//                 maxWidth: '432px',
-                
-//             });
+    gallery.innerHTML = '';
+        
+    if (inputValue.value.trim === '') {
+        return 
+    }
+
+    loading.classList.add('loading');
+
+    getImages().then(data => {
+        if (data.total === 0) {
+                iziToast.show({
+                    titleColor: '#fff',
+                    titleSize: '16px',
+                    message: 'Sorry, there are no images matching your search query. Please try again!',
+                    messageColor: '#fff',
+                    messageSize: '16px',
+                    iconUrl: errorIcon,
+                    position: 'topRight',
+                    backgroundColor: '#ef4040',
+                    close: true,
+                    maxWidth: '432px',
+                })
+        }
+        createMarkup(data.hits);
+
+        const lightbox = new SimpleLightbox('.gallery a',
+                                        { 
+                                        captionsData: 'alt',
+                                        captionDelay: 250,
+            });
+        lightbox.refresh();
+
+        })
+
+    section.reset();
+
+}
