@@ -16,7 +16,7 @@ export const gallery = document.querySelector('.gallery');
 const formSubmit = document.querySelector('.form');
 export const inputValue = document.querySelector('.input-value');
 const section = document.querySelector('section');
-export const loading = document.querySelector('div');
+export const loader = document.querySelector('div');
 
 // ======================================================================
 

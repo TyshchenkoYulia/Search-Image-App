@@ -1,5 +1,5 @@
  
-import {gallery, loading} from "../main";
+import {gallery, loader} from "../main";
 
 // ==============================================================
 
@@ -32,5 +32,5 @@ export function createMarkup(images) {
     }).join('');
 
     gallery.innerHTML = markup;
-    loading.classList.remove('loading');
+    loader.classList.remove('loader');
 }
