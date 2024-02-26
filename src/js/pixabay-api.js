@@ -7,8 +7,8 @@ export function getImages() {
     const BACE_URL = "https://pixabay.com/api/?key=";
     const QUERY = inputValue.value;
 
-    const URL = BACE_URL + KEY + "&q=" + QUERY +"&image_type=photo&orientation=horizontal&safesearch=true";
-    
+    const URL = BACE_URL+KEY+"&q="+QUERY+"&image_type=photo&orientation=horizontal&safesearch=true";
+   
     
     return fetch(URL)
         .then(response => {

@@ -23,7 +23,7 @@ export const loader = document.querySelector('div');
 formSubmit.addEventListener('submit', onButtonSubmitForm);
 
 function onButtonSubmitForm(event) {
-    event.preventDafault();
+    // event.preventDafault();
 
     gallery.innerHTML = '';
         
@@ -31,7 +31,7 @@ function onButtonSubmitForm(event) {
         return 
     }
 
-    loading.classList.add('loading');
+    loader.classList.add('loader');
 
     getImages().then(data => {
         if (data.total === 0) {
@@ -62,3 +62,5 @@ function onButtonSubmitForm(event) {
     section.reset();
 
 }
+
+onButtonSubmitForm();
