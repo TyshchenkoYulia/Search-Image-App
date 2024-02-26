@@ -23,7 +23,7 @@ export const loader = document.querySelector('div');
 formSubmit.addEventListener('submit', onButtonSubmitForm);
 
 function onButtonSubmitForm(event) {
-    // event.preventDafault();
+    event.preventDefault();
 
     gallery.innerHTML = '';
         
@@ -59,8 +59,7 @@ function onButtonSubmitForm(event) {
 
         })
 
-    section.reset();
+    formSubmit.reset();
 
 }
 
-onButtonSubmitForm();
