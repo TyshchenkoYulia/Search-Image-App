@@ -8,32 +8,48 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import errorIcon from "../src/img/error-icon.svg";
 
 import { getImages} from "./js/pixabay-api";
-import { createMarkup } from "./js/render-functions";
+import { renderGalleryMarkup } from "./js/render-functions";
+
+import { refs } from "./js/refs";
 
 // ====================================================================
 
-export const gallery = document.querySelector('.gallery');
-const formSubmit = document.querySelector('.form');
-export const inputValue = document.querySelector('.input-value');
-const section = document.querySelector('section');
-export const loader = document.querySelector('div');
 
-// ======================================================================
+refs.formSubmit.addEventListener('submit', onButtonSubmitForm);
 
-formSubmit.addEventListener('submit', onButtonSubmitForm);
-
+const lightbox = new SimpleLightbox('.gallery a',
+                                        { 
+                                        captionsData: 'alt',
+                                        captionDelay: 250,
+    });
+            
+    
 function onButtonSubmitForm(event) {
     event.preventDefault();
 
-    gallery.innerHTML = '';
-        
-    if (inputValue.value.trim === '') {
-        return 
+    refs.gallery.innerHTML = '';
+    
+    const inputValue = refs.input.value.trim();
+
+    if (inputValue === '') {
+            iziToast.show({
+                    
+                    titleColor: '#fff',
+                    titleSize: '16px',
+                    message: `Please, enter your search query!!!`,
+                    messageColor: '#fff',
+                    messageSize: '16px',
+                    position: 'topRight',
+                    backgroundColor: '#59A10D',
+                    close: false,
+                })
+
+        return;
     }
 
-    loader.classList.add('loader');
+    refs.loader.classList.add('loader');
 
-    getImages().then(data => {
+    getImages(inputValue).then(data => {
         if (data.total === 0) {
                 iziToast.show({
                     titleColor: '#fff',
@@ -48,18 +64,15 @@ function onButtonSubmitForm(event) {
                     maxWidth: '432px',
                 })
         }
-        createMarkup(data.hits);
+        renderGalleryMarkup(data.hits);
 
-        const lightbox = new SimpleLightbox('.gallery a',
-                                        { 
-                                        captionsData: 'alt',
-                                        captionDelay: 250,
-            });
+        
         lightbox.refresh();
 
         })
 
-    formSubmit.reset();
+    refs.formSubmit.reset();
 
+    
 }
 

@@ -1,11 +1,11 @@
 
-import { inputValue } from '../main';
 
-export function getImages() {
+
+export function getImages(inputValue) {
 
     const KEY = '42556248-7d7b04b226b16d9af953a75af';
     const BACE_URL = "https://pixabay.com/api/?key=";
-    const QUERY = inputValue.value;
+    const QUERY = inputValue;
 
     const URL = BACE_URL+KEY+"&q="+QUERY+"&image_type=photo&orientation=horizontal&safesearch=true";
    
