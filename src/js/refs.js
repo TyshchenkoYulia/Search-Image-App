@@ -1,8 +1,8 @@
-
 export const refs = {
-    gallery: document.querySelector('.gallery'),
-    formSubmit: document.querySelector('.form'),
-    input: document.querySelector('.input-value'),
-    section: document.querySelector('section'),
-    loader: document.querySelector('div'),
-}
+  gallery: document.querySelector('.gallery'),
+  formSubmit: document.querySelector('.form'),
+  input: document.querySelector('.input-value'),
+  section: document.querySelector('section'),
+  loader: document.querySelector('div'),
+  loadMoreButton: document.querySelector('[data-action="load-more"]'),
+};
